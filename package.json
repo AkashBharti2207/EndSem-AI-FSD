@@ -2,8 +2,9 @@
   "name": "complaint-system-root",
   "version": "1.0.0",
   "scripts": {
-    "install-all": "cd backend && npm install && cd ../frontend && npm install",
-    "start": "npm run start --prefix backend",
+    "postinstall": "npm install --prefix backend",
+    "build": "npm install --prefix backend",
+    "start": "node backend/server.js",
     "dev": "cd backend && start npm start && cd ../frontend && start npm run dev"
   }
 }
