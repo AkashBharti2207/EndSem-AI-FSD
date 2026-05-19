@@ -22,11 +22,27 @@ app.use('/api/complaints', complaintRoutes);
 app.use('/api/ai', aiRoutes);
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log('DB Connection Error:', err));
+const { MongoMemoryServer } = require('mongodb-memory-server');
+
+const connectDB = async () => {
+  try {
+    let mongoUri = process.env.MONGO_URI;
+    
+    // Use Memory Server if the URI is the default local one
+    if (mongoUri.includes('127.0.0.1')) {
+      console.log('Starting in-memory MongoDB for local development...');
+      const mongoServer = await MongoMemoryServer.create();
+      mongoUri = mongoServer.getUri();
+    }
+    
+    await mongoose.connect(mongoUri);
+    console.log('MongoDB Connected to', mongoUri);
+  } catch (err) {
+    console.log('DB Connection Error:', err);
+  }
+};
+
+connectDB();
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

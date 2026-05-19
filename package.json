@@ -1,0 +1,9 @@
+{
+  "name": "complaint-system-root",
+  "version": "1.0.0",
+  "scripts": {
+    "install-all": "cd backend && npm install && cd ../frontend && npm install",
+    "start": "npm run start --prefix backend",
+    "dev": "cd backend && start npm start && cd ../frontend && start npm run dev"
+  }
+}
