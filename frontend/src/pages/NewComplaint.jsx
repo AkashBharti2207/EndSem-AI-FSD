@@ -28,7 +28,7 @@ const NewComplaint = () => {
       // First, get AI analysis
       let aiData = {};
       try {
-        const aiRes = await axios.post('http://localhost:5000/api/ai/analyze', {
+        const aiRes = await axios.post('/api/ai/analyze', {
           title: formData.title,
           description: formData.description,
           category: formData.category
@@ -42,7 +42,7 @@ const NewComplaint = () => {
       const finalData = { ...formData, ...aiData };
 
       // Save complaint
-      await axios.post('http://localhost:5000/api/complaints', finalData);
+      await axios.post('/api/complaints', finalData);
       
       setIsAnalyzing(false);
       navigate('/');

@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   const fetchComplaints = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/complaints');
+      const res = await axios.get('/api/complaints');
       setComplaints(res.data);
     } catch (err) {
       console.error(err);
@@ -25,7 +25,7 @@ const Dashboard = () => {
     if (!locationFilter) return fetchComplaints();
     
     try {
-      const res = await axios.get(`http://localhost:5000/api/complaints/search?location=${locationFilter}`);
+      const res = await axios.get(`/api/complaints/search?location=${locationFilter}`);
       setComplaints(res.data);
     } catch (err) {
       console.error(err);

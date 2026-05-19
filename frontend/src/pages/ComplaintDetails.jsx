@@ -16,7 +16,7 @@ const ComplaintDetails = () => {
   const fetchComplaint = async () => {
     try {
       // Find complaint from the list
-      const res = await axios.get('http://localhost:5000/api/complaints');
+      const res = await axios.get('/api/complaints');
       const found = res.data.find(c => c._id === id);
       if (found) {
         setComplaint(found);
@@ -32,7 +32,7 @@ const ComplaintDetails = () => {
   const handleStatusUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/complaints/${id}`, { status });
+      await axios.put(`/api/complaints/${id}`, { status });
       // update local state
       setComplaint({ ...complaint, status });
       alert('Status updated successfully');
@@ -45,7 +45,7 @@ const ComplaintDetails = () => {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this complaint?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/complaints/${id}`);
+        await axios.delete(`/api/complaints/${id}`);
         navigate('/');
       } catch (err) {
         console.error(err);
