@@ -26,10 +26,10 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 
 const connectDB = async () => {
   try {
-    let mongoUri = process.env.MONGO_URI;
+    let mongoUri = process.env.MONGO_URI || '';
     
-    // Use Memory Server if the URI is the default local one
-    if (mongoUri.includes('127.0.0.1')) {
+    // Use Memory Server if the URI is the default local one or not provided
+    if (!mongoUri || mongoUri.includes('127.0.0.1')) {
       console.log('Starting in-memory MongoDB for local development...');
       const mongoServer = await MongoMemoryServer.create();
       mongoUri = mongoServer.getUri();
